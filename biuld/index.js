@@ -1,5 +1,4 @@
 "use strict";
-// import readline module for getting input from the console
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -15,6 +14,25 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -51,9 +69,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var rl = readLine.createInterface({
-    input: process.stdin,
-    output: process.stdout,
+Object.defineProperty(exports, "__esModule", { value: true });
+var readLine = __importStar(require("readline"));
+//const readLine = require('readline');
+// Import readline module for getting input from the console
+var rl = readLine.createInterface({ input: process.stdin, output: process.stdout,
 });
 var menuQ = function () {
     return new Promise(function (resolve, reject) {
@@ -103,14 +123,14 @@ var peppermintQ = function () {
         }
     });
 };
-// create parent class mocha
+// Create parent class mocha
 var Mocha = /** @class */ (function () {
     function Mocha() {
         this.milk = 1;
         this.shot = 1;
         this.chocolateType = 'dark';
     }
-    // list the ingredients of mocha
+    // List the ingredients of mocha
     Mocha.prototype.prepare = function () {
         console.log('Your', this.chocolateType, 'Chocolate Mocha Ingredients:');
         console.log(this.chocolateType, ' chocolate');
@@ -119,7 +139,7 @@ var Mocha = /** @class */ (function () {
     };
     return Mocha;
 }());
-// inherits from Mocha
+// Inherits from Mocha
 var WhiteChocolateMocha = /** @class */ (function (_super) {
     __extends(WhiteChocolateMocha, _super);
     function WhiteChocolateMocha() {
@@ -144,7 +164,7 @@ var PeppermintMocha = /** @class */ (function (_super) {
     __extends(PeppermintMocha, _super);
     function PeppermintMocha() {
         var _this = 
-        // include super to pull in parent constructor
+        // Include super to pull in parent constructor
         _super.call(this) || this;
         _this.peppermintSyrup = 1;
         return _this;
@@ -159,7 +179,7 @@ var PeppermintMocha = /** @class */ (function (_super) {
     };
     return PeppermintMocha;
 }(Mocha));
-// display menu and return selected menu item
+// Display menu and return selected menu item
 var showMenu = function () { return __awaiter(void 0, void 0, void 0, function () {
     var qMenu;
     return __generator(this, function (_a) {
@@ -252,7 +272,7 @@ var main = function () {
                     if (menuChoice != 0) return [3 /*break*/, 0];
                     _b.label = 11;
                 case 11:
-                    // end readline process
+                    // End readline process
                     rl.close();
                     return [2 /*return*/];
             }
@@ -260,5 +280,5 @@ var main = function () {
     }); };
     buildMocha();
 };
-// launch the app
+// Launch the app
 main();

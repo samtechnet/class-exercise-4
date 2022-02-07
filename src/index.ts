@@ -1,15 +1,27 @@
-const readLine = require('readline');
+import * as readLine from 'readline';
+//const readLine = require('readline');
 // Import readline module for getting input from the console
 
-const rl = readLine.createInterface({
-  input: process.stdin,
-  output: process.stdout,
+const rl = readLine.createInterface({input: process.stdin, output: process.stdout,
 });
 
-const menuQ = () => {
+const menuQ = (): Promise<string> => {
   return new Promise((resolve, reject) => {
     try{
-      rl.question('your choice: ', (answer) => {
+      rl.question('your choice: ', (answer: string):void => {
+        resolve(answer)
+      })
+    }
+    catch (error) {
+      reject();
+    }
+  });
+};
+
+const milkQ = ():Promise<string> => {
+  return new Promise((resolve, reject) => {
+    try{
+      rl.question('How many cups of milk to add? ', (answer: string): void => {
       resolve(answer)
     })
   }
@@ -19,10 +31,10 @@ const menuQ = () => {
   });
 }
 
-const milkQ = () => {
+const espressoQ = ():Promise<string> => {
   return new Promise((resolve, reject) => {
     try{
-      rl.question('How many cups of milk to add? ', (answer) => {
+      rl.question('How many shots of espresso to add? ', (answer: string):void => {
       resolve(answer)
     })
   }
@@ -32,10 +44,10 @@ const milkQ = () => {
   });
 }
 
-const espressoQ = () => {
+const peppermintQ = ():Promise<string> => {
   return new Promise((resolve, reject) => {
     try{
-      rl.question('How many shots of espresso to add? ', (answer) => {
+      rl.question('How many shots of peppermint to add? ', (answer: string): void => {
       resolve(answer)
     })
   }
@@ -45,43 +57,29 @@ const espressoQ = () => {
   });
 }
 
-const peppermintQ = () => {
-  return new Promise((resolve, reject) => {
-    try{
-      rl.question('How many shots of peppermint to add? ', (answer) => {
-      resolve(answer)
-    })
-  }
-  catch(error){
-    reject();
-  }
-  });
-}
-
-// create parent class mocha
+// Create parent class mocha
 class Mocha {
   milk: number;
  shot: number;
-  chocolateType: string;
+ chocolateType: string;
 
-  constructor(){
+  constructor() {
     this.milk = 1;
     this.shot = 1;
     this.chocolateType = 'dark';
   }
 
-  // list the ingredients of mocha
-  prepare(){
+// List the ingredients of mocha
+  prepare(): void {
     console.log('Your', this.chocolateType, 'Chocolate Mocha Ingredients:');
     console.log(this.chocolateType, ' chocolate');
     console.log('Cups of milk: ', this.milk);
     console.log('Cups of espresso: ', this.shot, '\n\n');
-
   }
 
 }
 
-// inherits from Mocha
+// Inherits from Mocha
 class WhiteChocolateMocha extends Mocha {
   chocolateType = 'White';
 }
@@ -93,13 +91,14 @@ class DarkChocolateMocha extends Mocha {
 class PeppermintMocha extends Mocha {
   // add peppermint property
   peppermintSyrup: number;
-  constructor() {
-    // include super to pull in parent constructor
+   constructor() {
+ 
+// Include super to pull in parent constructor
     super();
     this.peppermintSyrup = 1;
   }
   // Overrides Mocha prepare with additional statements
-  prepare() {
+  prepare():void {
     console.log('Your Peppermint Mocha Ingredients:');
     console.log('Dark chocolate');
     console.log('Cups of milk: ', this.milk);
@@ -108,14 +107,14 @@ class PeppermintMocha extends Mocha {
   }
 }
 
-// display menu and return selected menu item
-const showMenu = async () => {
+// Display menu and return selected menu item
+const showMenu = async ():Promise<string> => {
   console.log(
     'Select Mocha from menu: \n',
     '1: Create White Chocolate Mocha \n',
     '2: Create Dark Chocolate Mocha \n',
     '3: Create Peppermint Mocha\n',
-    '0: Exit\n'
+    '0: Exit\n',
   );
   const qMenu = await menuQ();
   return qMenu;
@@ -124,7 +123,7 @@ const showMenu = async () => {
 // User questions
 const userOptions = async (
   mochaObject: Mocha | PeppermintMocha
-) => {
+): Promise<void> => {
   const milkPicked = await milkQ();
   const milkChoice: number = parseInt(milkPicked);
   const espPicked = await espressoQ();
@@ -172,11 +171,11 @@ const main = () => {
         }
       }
     } while (menuChoice != 0);
-    // end readline process
+    // End readline process
     rl.close();
   };
   buildMocha();
 };
 
-// launch the app
+// Launch the app
 main();
